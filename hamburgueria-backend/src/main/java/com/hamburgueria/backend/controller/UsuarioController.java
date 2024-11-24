@@ -1,0 +1,31 @@
+package com.hamburgueria.backend.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.hamburgueria.backend.model.Usuario;
+import com.hamburgueria.backend.service.UsuarioService;
+
+
+@RestController
+@RequestMapping("/usuario")
+public class UsuarioController {
+	
+	@Autowired
+    private UsuarioService usuarioService;
+
+    @PostMapping("/cadastrar")
+    public Usuario cadastrar(@RequestBody Usuario usuario) {
+        return usuarioService.cadastrarUsuario(usuario);
+    }
+
+    @PostMapping("/login")
+    public Usuario login(@RequestParam String email, @RequestParam String senha) {
+        return usuarioService.login(email, senha);
+    }
+
+}
